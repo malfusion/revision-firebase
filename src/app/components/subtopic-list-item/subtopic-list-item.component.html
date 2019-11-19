@@ -1,10 +1,10 @@
-<mat-list-item class="subtopic-list-item" [ngClass]="'confidence-border-' + subtopic.confidence">
+<mat-list-item class="subtopic-list-item" (click)="onClickItem($event)" [ngClass]="'confidence-border-' + subtopic.confidence">
   <div class="row-container">
     <!-- ICON BLOCK -->
     <span>
       <span
         (contextmenu)="linkmenutrigger.openMenu()"
-        (click)="linkmenutrigger.openMenu()"
+        (click)="$event.stopPropagation(); linkmenutrigger.openMenu();"
         [matMenuTriggerFor]="linkmenu"
         #linkmenutrigger="matMenuTrigger"
       >
@@ -43,7 +43,7 @@
 
         <button class="link-menu-button" mat-menu-item (click)="editSubtopicLink(subtopic)">
           <mat-icon>add</mat-icon>
-          <span>Edit Link</span>
+          <span>Edit</span>
         </button>
 
         <button class="link-menu-button" mat-menu-item (click)="resetRevisions(subtopic)">
@@ -122,3 +122,14 @@
   <!-- <p class="path-text" mat-line>{{ topic.path }}</p> -->
   <mat-divider></mat-divider>
 </mat-list-item>
+<mat-accordion >
+  <mat-expansion-panel class="notes-shelf" [expanded]="notesOpen">
+    <textarea class="notes-text-area" matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="3"></textarea>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+

@@ -134,8 +134,8 @@ export class SubtopicListComponent implements OnInit, OnChanges {
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined && result !== '') {
+    dialogRef.afterClosed().subscribe((result: {name: string, link: string}) => {
+      if (result !== undefined && result.name !== '') {
         return this.db
           .collection('subjects')
           .doc(this.subjectId)
@@ -143,16 +143,16 @@ export class SubtopicListComponent implements OnInit, OnChanges {
           .doc(this.topicId)
           .collection('subtopics')
           .add({
-            name: result,
+            name: result.name,
             topic: this.topicId,
-            link: '',
+            link: result.link,
             confidence: 1,
             streak: 0,
             num_revisions: 0,
             revision_deadline: new Date(0)
           })
           .then(() => {
-            this.snackBar.open(`'${result}' Subtopic Added`, 'Hide', {
+            this.snackBar.open(`'${result}' Item Added`, 'Hide', {
               duration: 2000
             });
           });
@@ -165,7 +165,11 @@ export class SubtopicListComponent implements OnInit, OnChanges {
   templateUrl: 'new-subtopic-dialog.html'
 })
 export class NewSubtopicDialogComponent {
-  name = '';
+  subtopic = {
+    name: '',
+    link: ''
+  }
+  
   constructor(public dialogRef: MatDialogRef<NewSubtopicDialogComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
 
   onNoClick(): void {

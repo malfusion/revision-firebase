@@ -1,11 +1,13 @@
 <h1 mat-dialog-title>Add New Subtopic</h1>
 <div mat-dialog-content>
-  <p>Enter subtopic name...</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="name" />
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Name" [(ngModel)]="subtopic.name" />
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Link" [(ngModel)]="subtopic.link" />
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="name" cdkFocusInitial>Add</button>
+  <button mat-button [mat-dialog-close]="subtopic" cdkFocusInitial>Add</button>
 </div>

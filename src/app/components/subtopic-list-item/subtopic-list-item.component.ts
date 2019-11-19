@@ -15,6 +15,7 @@ import { Store } from '@ngxs/store';
 export class SubtopicListItemComponent implements OnInit {
   db = firebase.firestore();
   shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  notesOpen = false;
 
   @Input() topicId = undefined;
   @Input() subjectId = undefined;
@@ -28,6 +29,14 @@ export class SubtopicListItemComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  onClickItem(evt){
+    console.log("ASasd")
+    evt.stopPropagation();
+    evt.preventDefault();
+    this.notesOpen = !this.notesOpen;
+    
+  }
 
   openNewGoogleSheet() {
     window.open('https://sheets.new', '_blank');
@@ -146,15 +155,16 @@ export class SubtopicListItemComponent implements OnInit {
   }
 
   editSubtopicLink(subtopic) {
-    const dialogRef = this.dialog.open(EditSubtopicLinkDialogComponent, {
+    const dialogRef = this.dialog.open(EditSubtopicDialogComponent, {
       width: '400px',
       data: {
+        name: subtopic.name,
         link: subtopic.link
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined && result !== '') {
+    dialogRef.afterClosed().subscribe((result: {name: string, link: string}) => {
+      if (result !== undefined && result.name !== '') {
         return this.db
           .collection('subjects')
           .doc(this.subjectId)
@@ -164,12 +174,13 @@ export class SubtopicListItemComponent implements OnInit {
           .doc(subtopic.id)
           .set(
             {
-              link: result
+              name: result.name,
+              link: result.link
             },
             { merge: true }
           )
           .then(() => {
-            this.snackBar.open(`Subtopic Link Updated`, 'Hide', {
+            this.snackBar.open(`Item Updated`, 'Hide', {
               duration: 2000
             });
           });
@@ -272,11 +283,11 @@ export class SubtopicListItemComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-edit-subtopic-link-dialog',
-  templateUrl: 'edit-subtopic-link-dialog.html'
+  selector: 'app-edit-subtopic-dialog',
+  templateUrl: 'edit-subtopic-dialog.html'
 })
-export class EditSubtopicLinkDialogComponent {
-  constructor(public dialogRef: MatDialogRef<EditSubtopicLinkDialogComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
+export class EditSubtopicDialogComponent {
+  constructor(public dialogRef: MatDialogRef<EditSubtopicDialogComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
 
   onNoClick(): void {
     this.dialogRef.close();

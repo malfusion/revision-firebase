@@ -1,4 +1,23 @@
+.notes-shelf{
+  position: relative;
+  top: -7px;
+  transition: 0.2s height ease-in-out;
+  
+  .notes-text-area{
+    width: calc(100% - 20px);;
+    margin-top: 20px;
+    padding: 10px;
+    border: thin solid #eee;
+    &:focus,&:active{
+      outline: none;
+    }
+  }
+
+}
+
+
 .subtopic-list-item {
+  width: calc(100% - 5px);
   margin: 10px 0px;
   box-shadow: #e6e6e68a 0px 0px 1px 1px;
   background: #fefefe;
@@ -19,6 +38,7 @@
 
   .name-block {
     font-size: 14px;
+    margin-left: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;

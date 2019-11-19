@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { StartupComponent } from './pages/startup/startup.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -26,7 +27,7 @@ import { TopicTreeComponent, NewTopicDialogComponent } from './components/topic-
 import { SubjectDetailComponent } from './pages/subject-detail/subject-detail.component';
 import {
   SubtopicListItemComponent,
-  EditSubtopicLinkDialogComponent
+  EditSubtopicDialogComponent
 } from './components/subtopic-list-item/subtopic-list-item.component';
 
 import { NewSubtopicDialogComponent } from './components/subtopic-list/subtopic-list.component';
@@ -52,7 +53,7 @@ import { TodayComponent } from './pages/today/today.component';
     NewSubjectDialogComponent,
     NewTopicDialogComponent,
     NewSubtopicDialogComponent,
-    EditSubtopicLinkDialogComponent,
+    EditSubtopicDialogComponent,
     TopicListItemComponent,
     SubtopicPriorityPipe,
     SubtopicListComponent,
@@ -73,6 +74,7 @@ import { TodayComponent } from './pages/today/today.component';
     MatButtonModule,
     MatSnackBarModule,
     MatFormFieldModule,
+    MatExpansionModule,
     AppRoutingModule,
     NgxsModule.forRoot([AppState, TopicsState], {
       developmentMode: true
@@ -85,7 +87,7 @@ import { TodayComponent } from './pages/today/today.component';
     NewSubjectDialogComponent,
     NewTopicDialogComponent,
     NewSubtopicDialogComponent,
-    EditSubtopicLinkDialogComponent
+    EditSubtopicDialogComponent
   ]
 })
 export class AppModule {}
