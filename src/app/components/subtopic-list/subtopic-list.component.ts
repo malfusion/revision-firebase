@@ -46,6 +46,7 @@ export class SubtopicListComponent implements OnInit, OnChanges {
   }
 
   getSubtopicsFiltered(subjectId, topicId, status, confidence, limit) {
+    console.log("ASasdas", subjectId, topicId, status, confidence, limit)
     if (this.subtopicsUnsubscribe) {
       this.subtopicsUnsubscribe();
     }
@@ -60,12 +61,12 @@ export class SubtopicListComponent implements OnInit, OnChanges {
     } else {
       subtopicsRef = this.db.collectionGroup('subtopics');
     }
-
+    console.log(status)
     if (status === 'revision') {
       if (confidence !== undefined) {
         subtopicsRef = subtopicsRef.where('confidence', '==', confidence);
       }
-      subtopicsRef = subtopicsRef.where('revision_deadline', '>', new Date(1000));
+      subtopicsRef = subtopicsRef.where('revision_deadline', '>=', new Date(0));
       subtopicsRef = subtopicsRef.where('revision_deadline', '<', new Date());
     } else if (status === 'unattended') {
       subtopicsRef = subtopicsRef.where('revision_deadline', '==', new Date(0));
@@ -147,7 +148,8 @@ export class SubtopicListComponent implements OnInit, OnChanges {
             link: '',
             confidence: 1,
             streak: 0,
-            num_revisions: 0
+            num_revisions: 0,
+            revision_deadline: new Date(0)
           })
           .then(() => {
             this.snackBar.open(`'${result}' Subtopic Added`, 'Hide', {
