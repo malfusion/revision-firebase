@@ -1,0 +1,4 @@
+<div class="container" *ngIf="subjectDetails">
+  <h3 class="subject-header">Subject - {{ subjectDetails.name }}</h3>
+  <app-topic-tree [subjectId]="subjectDetails.id"></app-topic-tree>
+</div>

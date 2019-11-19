@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.action-menu {
+  .mat-menu-content {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background: #505050;
+  }
+}
+
+.confidence-menu {
+  min-width: 50px !important;
+  .mat-menu-item {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,16 @@
+<div class="container">
+  <mat-toolbar color="primary" class="app-toolbar">
+    <span class="toolbar-menu-icon-container" mat-icon-button (click)="snav.toggle()">
+      <mat-icon class="toolbar-menu-icon">menu</mat-icon>
+    </span>
+    <span class="app-name">Grad StudyPal</span>
+  </mat-toolbar>
+  <mat-sidenav-container class="nav-container">
+    <mat-sidenav mode="side" opened #snav>
+      <app-subject-nav></app-subject-nav>
+    </mat-sidenav>
+    <mat-sidenav-content class="content-container">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

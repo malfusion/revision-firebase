@@ -1,0 +1,124 @@
+<mat-list-item class="subtopic-list-item" [ngClass]="'confidence-border-' + subtopic.confidence">
+  <div class="row-container">
+    <!-- ICON BLOCK -->
+    <span>
+      <span
+        (contextmenu)="linkmenutrigger.openMenu()"
+        (click)="linkmenutrigger.openMenu()"
+        [matMenuTriggerFor]="linkmenu"
+        #linkmenutrigger="matMenuTrigger"
+      >
+        <mat-icon *ngIf="containsLink(subtopic)" class="centered-icon icon-small icon-gray" mat-list-icon>
+          assignment_late
+        </mat-icon>
+        <mat-icon *ngIf="!containsLink(subtopic)" class="centered-icon icon-small icon-gray" mat-list-icon>
+          assignment
+        </mat-icon>
+      </span>
+
+      <mat-menu class="link-menu" #linkmenu="matMenu">
+        <button *ngIf="containsLink(subtopic)" class="link-menu-button" mat-menu-item (click)="openNewGoogleSheet()">
+          <mat-icon>add</mat-icon>
+          <span>New Sheet</span>
+        </button>
+
+        <button
+          *ngIf="!containsLink(subtopic)"
+          class="link-menu-button"
+          mat-menu-item
+          (click)="openSubtopicLink(subtopic)"
+        >
+          <mat-icon>open_in_new</mat-icon>
+          <span>Open Link</span>
+        </button>
+        <button class="link-menu-button" mat-menu-item (click)="addToTodoist(subtopic.name, 'today')">
+          <mat-icon>add</mat-icon>
+          <span>Todoist - Today</span>
+        </button>
+
+        <button class="link-menu-button" mat-menu-item (click)="addToTodoist(subtopic.name, 'tomorrow')">
+          <mat-icon>add</mat-icon>
+          <span>Todoist - Tomorrow</span>
+        </button>
+
+        <button class="link-menu-button" mat-menu-item (click)="editSubtopicLink(subtopic)">
+          <mat-icon>add</mat-icon>
+          <span>Edit Link</span>
+        </button>
+
+        <button class="link-menu-button" mat-menu-item (click)="resetRevisions(subtopic)">
+          <mat-icon>error_outline</mat-icon>
+          <span>Reset Revisions</span>
+        </button>
+      </mat-menu>
+    </span>
+
+    <!-- NAME BLOCK -->
+    <span class="name-block">
+      {{ subtopic.name }} {{ getDaysAgo(subtopic.revision_deadline) }}
+      <span class="push"></span>
+      <span
+        *ngIf="!needsFirstRead(subtopic)"
+        class="confidence-square"
+        [ngClass]="'confidence-' + subtopic.confidence"
+      ></span>
+      <mat-icon *ngIf="needsRevisionWarning(subtopic)" class="centered-icon icon-small icon-red" mat-list-icon>
+        error_outline
+      </mat-icon>
+      <mat-icon *ngIf="needsFirstRead(subtopic)" class="centered-icon icon-small icon-orange" mat-list-icon>
+        new_releases
+      </mat-icon>
+    </span>
+
+    <!-- TIMELINE BLOCK -->
+    <!--
+            <span class="timeline-block">
+               <div class="time-scroller">
+                <span
+                  class="time"
+                  [ngClass]="getRevisionClass(revision.confidence)"
+                  *ngFor="let revision of subtopic.dates_revised"
+                >
+                  {{ getShortDate(revision.ts) }}
+                </span>
+              </div> 
+            </span>
+            -->
+
+    <!-- ACTIONS BLOCK -->
+    <span class="actions-block">
+      <button class="action-button" mat-stroked-button [matMenuTriggerFor]="actionmenu">
+        Actions
+      </button>
+      <mat-menu class="action-menu" #actionmenu="matMenu">
+        <button
+          mat-menu-item
+          style="background: lightgreen;"
+          (click)="addRevisionToSubtopic(subtopic.subject, subtopic.topic, subtopic.id, 3)"
+        >
+          <mat-icon>thumb_up</mat-icon>
+          <span>Aced it</span>
+        </button>
+        <button
+          mat-menu-item
+          style="background: gold;"
+          (click)="addRevisionToSubtopic(subtopic.subject, subtopic.topic, subtopic.id, 2)"
+        >
+          <mat-icon>replay</mat-icon>
+          <span>Must Revise</span>
+        </button>
+        <button
+          mat-menu-item
+          style="background: lightcoral;"
+          (click)="addRevisionToSubtopic(subtopic.subject, subtopic.topic, subtopic.id, 1)"
+        >
+          <mat-icon>error</mat-icon>
+          <span>Bad Shape</span>
+        </button>
+      </mat-menu>
+    </span>
+  </div>
+
+  <!-- <p class="path-text" mat-line>{{ topic.path }}</p> -->
+  <mat-divider></mat-divider>
+</mat-list-item>

@@ -1,0 +1,102 @@
+<mat-list-item (click)="onTopicClicked(topic.id)">
+  <div class="topic-line">
+    <mat-icon class="centered-icon color-gray icon-small" mat-list-icon>control_point</mat-icon>
+    <span class="name-block" mat-line>
+      {{ topic.name }}
+    </span>
+
+    <span class="filter-block">
+      <span class="flex-row only-desktop">
+        <button
+          class="confidence-filter-btn"
+          mat-stroked-button
+          [ngClass]="{ selected: confidenceFilter === 1 }"
+          (click)="setConfidenceFilter($event, 1)"
+        >
+          <div class="confidence-filter-btn-content confidence-1"></div>
+        </button>
+        <button
+          class="confidence-filter-btn"
+          mat-stroked-button
+          [ngClass]="{ selected: confidenceFilter === 2 }"
+          (click)="setConfidenceFilter($event, 2)"
+        >
+          <div class="confidence-filter-btn-content confidence-2"></div>
+        </button>
+        <button
+          class="confidence-filter-btn"
+          [ngClass]="{ selected: confidenceFilter === 3 }"
+          mat-stroked-button
+          (click)="setConfidenceFilter($event, 3)"
+        >
+          <div class="confidence-filter-btn-content confidence-3"></div>
+        </button>
+      </span>
+
+      <span class="flex-row only-mobile">
+        <span #confidenceTrigger="matMenuTrigger" [matMenuTriggerFor]="confidenceMenu"></span>
+        <button class="confidence-filter-btn" mat-stroked-button (click)="openConfidenceFilterMenu($event)">
+          <div
+            class="confidence-filter-btn-content"
+            [ngClass]="{
+              'confidence-1': confidenceFilter === 1,
+              'confidence-2': confidenceFilter === 2,
+              'confidence-3': confidenceFilter === 3
+            }"
+          ></div>
+        </button>
+        <mat-menu class="confidence-menu" #confidenceMenu="matMenu">
+          <button class="confidence-filter-btn" mat-menu-item (click)="setConfidenceFilter($event, undefined)">
+            <div style="height: 10px; width: 10px; background: lightgray;" class="confidence-filter-btn-content"></div>
+          </button>
+          <button class="confidence-filter-btn" mat-menu-item (click)="setConfidenceFilter($event, 1)">
+            <div
+              style="height: 10px; width: 10px; background: lightcoral;"
+              class="confidence-filter-btn-content confidence-1"
+            ></div>
+          </button>
+          <button class="confidence-filter-btn" mat-menu-item (click)="setConfidenceFilter($event, 2)">
+            <div
+              style="height: 10px; width: 10px; background: orange;"
+              class="confidence-filter-btn-content confidence-2"
+            ></div>
+          </button>
+          <button class="confidence-filter-btn" mat-menu-item (click)="setConfidenceFilter($event, 3)">
+            <div
+              style="height: 10px; width: 10px; background: lightgreen;"
+              class="confidence-filter-btn-content confidence-3"
+            ></div>
+          </button>
+        </mat-menu>
+      </span>
+
+      <button class="filter-button" mat-stroked-button (click)="onTopicFilterClicked($event)">
+        <span class="only-desktop">Filter By: </span>{{ getStatusName(statusFilter) }}
+      </button>
+      <span #filterTrigger="matMenuTrigger" [matMenuTriggerFor]="filterMenu"></span>
+      <mat-menu class="filter-menu" #filterMenu="matMenu">
+        <button mat-menu-item (click)="setFilter('aced')">
+          <mat-icon>thumb_up</mat-icon>
+          <span>{{ getStatusName('aced') }}</span>
+        </button>
+        <button mat-menu-item (click)="setFilter('revision')">
+          <mat-icon>replay</mat-icon>
+          <span>{{ getStatusName('revision') }}</span>
+        </button>
+        <button mat-menu-item (click)="setFilter('unattended')">
+          <mat-icon>error</mat-icon>
+          <span>{{ getStatusName('unattended') }}</span>
+        </button>
+      </mat-menu>
+    </span>
+  </div>
+  <!-- <p class="path-text" mat-line>{{ topic.path }}</p> -->
+</mat-list-item>
+<div *ngIf="expanded[topic.id]">
+  <app-subtopic-list
+    [subjectId]="subjectId"
+    [topicId]="topic.id"
+    [confidenceFilter]="confidenceFilter"
+    [statusFilter]="statusFilter"
+  ></app-subtopic-list>
+</div>

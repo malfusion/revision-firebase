@@ -1,0 +1,40 @@
+.centered-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-small {
+  font-size: 20px !important;
+}
+
+.color-gray {
+  color: gray;
+}
+
+.subject-list-item {
+  color: #444;
+  font-size: 13px;
+  border-left: 0px solid #673ab7;
+  transition: border 0.2s ease-in;
+
+  &.active {
+    border-left: thick solid #673ab7;
+    color: black;
+  }
+}
+
+.new-subject-btn {
+  font-size: 12px;
+  border: thin solid #eee;
+}
+
+// .nav-list-header {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   font-family: Roboto, 'Helvetica Neue', sans-serif;
+//   text-decoration: underline;
+//   color: #999;
+// }

@@ -1,0 +1,78 @@
+.container {
+  padding: 0px 5%;
+}
+
+.new-subtopic-btn {
+  font-size: 12px;
+  // border: thin solid #eee;
+}
+
+mat-list {
+  padding-top: 0px;
+}
+
+mat-nav-list {
+  padding-top: 0px;
+}
+
+.centered-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-small {
+  font-size: 20px !important;
+}
+
+.icon-gray {
+  color: gray;
+}
+
+.icon-red {
+  color: red;
+}
+
+.icon-orange {
+  color: orange;
+}
+
+.color-lightcoral {
+  color: lightcoral;
+}
+
+.color-lightgreen {
+  color: lightgreen;
+}
+
+.confidence-0 {
+  background: lightgray;
+}
+
+.confidence-1 {
+  background: lightcoral;
+}
+
+.confidence-2 {
+  background: orange;
+}
+
+.confidence-3 {
+  background: lightgreen;
+}
+
+.confidence-border-0 {
+  border-left: thick lightgray solid;
+}
+
+.confidence-border-1 {
+  border-left: thick lightcoral solid;
+}
+
+.confidence-border-2 {
+  border-left: thick orange solid;
+}
+
+.confidence-border-3 {
+  border-left: thick lightgreen solid;
+}

@@ -1,0 +1,18 @@
+<mat-nav-list>
+  <!-- <div class="nav-list-header">Subjects</div> -->
+  <a class="subject-list-item" mat-list-item routerLinkActive="active" [routerLink]="['today']">
+    What's Today?
+  </a>
+  <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <ng-container *ngFor="let sub of subjects; let last = last">
+    <a class="subject-list-item" mat-list-item routerLinkActive="active" [routerLink]="['subject', sub.id]">{{
+      sub.name
+    }}</a>
+    <mat-divider *ngIf="!last"></mat-divider>
+  </ng-container>
+
+  <a mat-list-item class="color-gray new-subject-btn" (click)="addNewSubject()">
+    <mat-icon class="centered-icon icon-small" mat-list-icon>control_point</mat-icon> Add New Subject
+  </a>
+</mat-nav-list>

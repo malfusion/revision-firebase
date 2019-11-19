@@ -1,0 +1,13 @@
+<div class="container">
+  <mat-list>
+    <mat-nav-list>
+      <ng-container *ngFor="let topic of topics; let last = last">
+        <app-topic-list-item [subjectId]="subjectId" [topic]="topic"></app-topic-list-item>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </ng-container>
+      <a mat-list-item class="color-gray new-topic-btn" (click)="addNewTopic()">
+        <mat-icon class="centered-icon icon-small" mat-list-icon>control_point</mat-icon> Add New Topic
+      </a>
+    </mat-nav-list>
+  </mat-list>
+</div>
