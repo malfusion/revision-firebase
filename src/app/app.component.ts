@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { AuthListener } from './services/auth/auth.listener';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ import { AuthListener } from './services/auth/auth.listener';
 export class AppComponent implements OnInit {
   title = 'revision-app';
 
-  constructor(private authListener: AuthListener) {}
+  constructor(private authListener: AuthListener, private router: Router) {}
 
   ngOnInit() {
     // Firebase App (the core Firebase SDK) is always required and must be listed first
@@ -30,5 +31,6 @@ export class AppComponent implements OnInit {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     this.authListener.initAuth();
+    this.router.navigate(['home', 'today']);
   }
 }

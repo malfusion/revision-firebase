@@ -31,6 +31,11 @@
           <mat-icon>open_in_new</mat-icon>
           <span>Open Link</span>
         </button>
+
+        <button class="link-menu-button" mat-menu-item (click)="editSubtopicLink(subtopic)">
+          <mat-icon>add</mat-icon>
+          <span>Edit</span>
+        </button>
         <button class="link-menu-button" mat-menu-item (click)="addToTodoist(subtopic.name, 'today')">
           <mat-icon>add</mat-icon>
           <span>Todoist - Today</span>
@@ -41,10 +46,14 @@
           <span>Todoist - Tomorrow</span>
         </button>
 
-        <button class="link-menu-button" mat-menu-item (click)="editSubtopicLink(subtopic)">
-          <mat-icon>add</mat-icon>
-          <span>Edit</span>
+        <button class="link-menu-button" mat-menu-item (click)="removeSubtopic(subtopic.subjectId, subtopic.topicId, subtopic.id)">
+          <mat-icon>remove_circle</mat-icon>
+          <span>Remove</span>
         </button>
+
+        
+
+        
 
         <button class="link-menu-button" mat-menu-item (click)="resetRevisions(subtopic)">
           <mat-icon>error_outline</mat-icon>
@@ -94,7 +103,7 @@
         <button
           mat-menu-item
           style="background: lightgreen;"
-          (click)="addRevisionToSubtopic(subtopic.subject, subtopic.topic, subtopic.id, 3)"
+          (click)="addRevisionToSubtopic(subtopic.subjectId, subtopic.topicId, subtopic.id, 3)"
         >
           <mat-icon>thumb_up</mat-icon>
           <span>Aced it</span>
@@ -102,7 +111,7 @@
         <button
           mat-menu-item
           style="background: gold;"
-          (click)="addRevisionToSubtopic(subtopic.subject, subtopic.topic, subtopic.id, 2)"
+          (click)="addRevisionToSubtopic(subtopic.subjectId, subtopic.topicId, subtopic.id, 2)"
         >
           <mat-icon>replay</mat-icon>
           <span>Must Revise</span>
@@ -110,7 +119,7 @@
         <button
           mat-menu-item
           style="background: lightcoral;"
-          (click)="addRevisionToSubtopic(subtopic.subject, subtopic.topic, subtopic.id, 1)"
+          (click)="addRevisionToSubtopic(subtopic.subjectId, subtopic.topicId, subtopic.id, 1)"
         >
           <mat-icon>error</mat-icon>
           <span>Bad Shape</span>

@@ -42,7 +42,6 @@ export class SubtopicListItemComponent implements OnInit {
   }
 
   onClickItem(evt){
-   
     evt.stopPropagation();
     evt.preventDefault();
     if(this.notesOpen === true && this.notesDirty){
@@ -237,6 +236,23 @@ export class SubtopicListItemComponent implements OnInit {
           });
       }
     });
+  }
+
+  removeSubtopic(subjectId, topicId, subtopicId){
+    const subtopicRef = this.db
+      .collection('subjects')
+      .doc(subjectId)
+      .collection('topics')
+      .doc(topicId)
+      .collection('subtopics')
+      .doc(subtopicId)
+      .delete()
+      .then(() => {
+        this.snackBar.open(`Item Deleted`, 'Hide', {
+          duration: 2000
+        });
+      })
+
   }
 
   addRevisionToSubtopic(subjectId, topicId, subtopicId, confidence) {

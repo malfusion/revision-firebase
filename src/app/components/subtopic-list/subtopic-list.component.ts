@@ -144,7 +144,8 @@ export class SubtopicListComponent implements OnInit, OnChanges {
           .collection('subtopics')
           .add({
             name: result.name,
-            topic: this.topicId,
+            topicId: this.topicId,
+            subjectId: this.subjectId,
             link: result.link,
             notes: '',
             confidence: 1,
