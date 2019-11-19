@@ -16,10 +16,13 @@ export class SubtopicListItemComponent implements OnInit {
   db = firebase.firestore();
   shortMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   notesOpen = false;
+  notesDirty = false;
+  noteText = ''
 
   @Input() topicId = undefined;
   @Input() subjectId = undefined;
   @Input() subtopic = undefined;
+
 
   constructor(
     private dialog: MatDialog,
@@ -28,14 +31,62 @@ export class SubtopicListItemComponent implements OnInit {
     private authService: AuthListener
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.subtopic !== undefined){
+      this.refreshNote(this.subtopic);
+    }
+  }
+
+  onNotesChange(){
+    this.notesDirty = true;
+  }
 
   onClickItem(evt){
-    console.log("ASasd")
+   
     evt.stopPropagation();
     evt.preventDefault();
-    this.notesOpen = !this.notesOpen;
-    
+    if(this.notesOpen === true && this.notesDirty){
+      this.saveNote(this.subtopic, this.noteText)
+    }else{
+      this.refreshNote(this.subtopic);
+      this.notesDirty = false;
+    }
+    this.notesOpen = !this.notesOpen;    
+  }
+
+  refreshNote(subtopic){
+    if(subtopic !== undefined){
+      const noteRef = this.db
+      .collection('notes')
+      .doc(this.subtopic.id)
+      .get()
+      .then(note => {
+        if (note.exists) {
+          this.noteText = ((note.data() || {}).content)
+        }
+      })
+    }  
+  }
+
+  saveNote(subtopic, noteText){
+    if(subtopic !== undefined && noteText !== undefined && noteText !== ''){
+      const noteRef = this.db
+      .collection('notes')
+      .doc(this.subtopic.id)
+      .set(
+        {
+          subtopicId: this.subtopic.id,
+          content: noteText,
+          userId: this.authService.loggedInUser.uid
+        },
+        { merge: true }
+      )
+      .then(() => {
+        this.snackBar.open(`Item Updated`, 'Hide', {
+          duration: 2000
+        });
+      });
+    }
   }
 
   openNewGoogleSheet() {

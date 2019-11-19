@@ -126,6 +126,8 @@
   <mat-expansion-panel class="notes-shelf" [expanded]="notesOpen">
     <textarea class="notes-text-area" matInput
             cdkTextareaAutosize
+            [(ngModel)]="noteText"
+            (change)="onNotesChange()"
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="3"></textarea>
   </mat-expansion-panel>

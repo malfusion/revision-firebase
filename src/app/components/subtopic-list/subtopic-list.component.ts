@@ -146,6 +146,7 @@ export class SubtopicListComponent implements OnInit, OnChanges {
             name: result.name,
             topic: this.topicId,
             link: result.link,
+            notes: '',
             confidence: 1,
             streak: 0,
             num_revisions: 0,
