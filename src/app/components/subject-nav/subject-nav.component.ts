@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { AppState } from 'src/app/services/state/app.state';
 
@@ -14,6 +13,7 @@ import { AppState } from 'src/app/services/state/app.state';
 export class SubjectNavComponent implements OnInit {
   subjects = [];
   db;
+  @Output('onItemClicked') onItemClicked = new EventEmitter<void>();
   @Select(AppState.currentSubject)
   currentSubject$;
 

@@ -5,9 +5,9 @@
     </span>
     <span class="app-name">Grad StudyPal</span>
   </mat-toolbar>
-  <mat-sidenav-container class="nav-container">
+  <mat-sidenav-container (backdropClick)="closeSidenav()" class="nav-container">
     <mat-sidenav mode="side" opened #snav>
-      <app-subject-nav></app-subject-nav>
+      <app-subject-nav (onItemClicked)="closeSidenav()"></app-subject-nav>
     </mat-sidenav>
     <mat-sidenav-content class="content-container">
       <router-outlet></router-outlet>

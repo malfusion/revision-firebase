@@ -1,6 +1,9 @@
 <div class="container">
   <mat-list>
     <mat-nav-list>
+      <div class="empty-list-indicator" *ngIf="subtopics?.length == 0">
+        Everything's good here.
+      </div>
       <ng-container *ngFor="let subtopic of subtopics">
         <app-subtopic-list-item
           [subjectId]="subjectId"

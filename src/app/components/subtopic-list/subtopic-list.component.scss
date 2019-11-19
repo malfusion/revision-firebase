@@ -2,9 +2,19 @@
   padding: 0px 5%;
 }
 
+.empty-list-indicator {
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 200;
+  background: #eee;
+}
+
 .new-subtopic-btn {
   font-size: 12px;
-  // border: thin solid #eee;
 }
 
 mat-list {

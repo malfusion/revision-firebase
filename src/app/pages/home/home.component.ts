@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 // import allQ from './chumma';
 // import interviewQ from './interview-qs';
 import * as firebase from 'firebase/app';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +12,11 @@ import * as firebase from 'firebase/app';
 })
 export class HomeComponent implements OnInit {
   db = firebase.firestore();
-
+  @ViewChild('snav', {static: false}) sideNav: MatSidenav;
   constructor() {}
 
   ngOnInit() {
+    
     // const probs = allQ.stat_status_pairs;
     // const probmap = {};
     // let intQs = interviewQ;
@@ -42,4 +45,9 @@ export class HomeComponent implements OnInit {
     // });
     // console.log(intQs);
   }
+
+  closeSidenav(){
+    this.sideNav.close();
+  }
+
 }
