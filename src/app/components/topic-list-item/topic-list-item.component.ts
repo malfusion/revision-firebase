@@ -17,7 +17,7 @@ export class TopicListItemComponent implements OnInit {
   expanded = {};
   currentTopicFilter$;
   confidenceFilter = undefined;
-  statusFilter = 'revision';
+  statusFilter = 'any';
 
   constructor(private store: Store) {}
 
@@ -44,8 +44,9 @@ export class TopicListItemComponent implements OnInit {
     return (
       {
         revision: 'To Revise',
-        unattended: 'Needs Attention',
-        aced: 'Healthy'
+        unattended: 'New Topics',
+        aced: 'Healthy',
+        any: 'Any',
       }[filterName] || ''
     );
   }

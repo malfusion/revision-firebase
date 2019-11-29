@@ -75,6 +75,10 @@
       </button>
       <span #filterTrigger="matMenuTrigger" [matMenuTriggerFor]="filterMenu"></span>
       <mat-menu class="filter-menu" #filterMenu="matMenu">
+        <button mat-menu-item (click)="setFilter('any')">
+          <mat-icon>error</mat-icon>
+          <span>{{ getStatusName('any') }}</span>
+        </button>
         <button mat-menu-item (click)="setFilter('aced')">
           <mat-icon>thumb_up</mat-icon>
           <span>{{ getStatusName('aced') }}</span>
