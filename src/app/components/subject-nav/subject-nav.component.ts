@@ -76,4 +76,8 @@ export class NewSubjectDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  onClose(res): void {
+    this.dialogRef.close(res);
+  }
 }

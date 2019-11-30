@@ -134,7 +134,7 @@ export class SubtopicListComponent implements OnInit, OnChanges {
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe((result: {name: string, link: string}) => {
+    dialogRef.afterClosed().subscribe((result: {name: string, link: string, notes: string}) => {
       if (result !== undefined && result.name !== '') {
         return this.db
           .collection('subjects')
@@ -147,18 +147,30 @@ export class SubtopicListComponent implements OnInit, OnChanges {
             topicId: this.topicId,
             subjectId: this.subjectId,
             link: result.link,
-            notes: '',
             confidence: 1,
             streak: 0,
             num_revisions: 0,
             revision_deadline: new Date(0)
           })
-          .then(() => {
-            this.snackBar.open(`'${result}' Item Added`, 'Hide', {
+          .then((doc) => {
+            return this.db
+            .collection('notes')
+            .doc(doc.id)
+            .set(
+              {
+                subtopicId: doc.id,
+                content: result.notes,
+                userId: this.authService.loggedInUser.uid
+              },
+              { merge: true }
+            )
+          })
+          .then((doc) => {
+            this.snackBar.open(`Item Added`, 'Hide', {
               duration: 2000
             });
-          });
-        
+          })
+          
         // let topicRef =  this.db
         //   .collection('subjects')
         //   .doc(this.subjectId)
@@ -212,12 +224,17 @@ export class SubtopicListComponent implements OnInit, OnChanges {
 export class NewSubtopicDialogComponent {
   subtopic = {
     name: '',
-    link: ''
+    link: '',
+    notes: ''
   }
   
   constructor(public dialogRef: MatDialogRef<NewSubtopicDialogComponent>, @Inject(MAT_DIALOG_DATA) public data) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onClose(res): void {
+    this.dialogRef.close(res);
   }
 }
