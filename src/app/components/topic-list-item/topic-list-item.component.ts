@@ -14,7 +14,7 @@ export class TopicListItemComponent implements OnInit {
   @ViewChild('filterTrigger', { static: false }) filterTrigger: MatMenuTrigger;
   @ViewChild('confidenceTrigger', { static: false }) confidenceTrigger: MatMenuTrigger;
 
-  expanded = {};
+  expanded = false;
   currentTopicFilter$;
   confidenceFilter = undefined;
   statusFilter = 'any';
@@ -26,8 +26,7 @@ export class TopicListItemComponent implements OnInit {
   }
 
   onTopicClicked(topicId) {
-    this.expanded[topicId] = !this.expanded[topicId];
-    console.log(this.expanded);
+    this.expanded = !this.expanded;
   }
 
   onTopicFilterClicked($event) {

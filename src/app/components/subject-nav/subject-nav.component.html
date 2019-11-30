@@ -8,7 +8,7 @@
   <ng-container *ngFor="let sub of subjects; let last = last">
     <a class="subject-list-item" mat-list-item (click)="onItemClicked.emit();" routerLinkActive="active" [routerLink]="['subject', sub.id]">{{
       sub.name
-    }}</a>
+    }} ({{sub.count}})</a>
     <mat-divider *ngIf="!last"></mat-divider>
   </ng-container>
 

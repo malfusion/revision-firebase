@@ -136,46 +136,71 @@ export class SubtopicListComponent implements OnInit, OnChanges {
 
     dialogRef.afterClosed().subscribe((result: {name: string, link: string}) => {
       if (result !== undefined && result.name !== '') {
-        
-        let topicRef =  this.db
+        return this.db
           .collection('subjects')
           .doc(this.subjectId)
           .collection('topics')
           .doc(this.topicId)
-
-        this.db.runTransaction(t => {
-          return t
-            .get(topicRef)
-            .then(topic => {
-              if (!topic.exists) {
-                throw Error('Topic does not exist!');
-              } else {
-                const updates = {
-                  count: (topic.data().count || 0) + 1
-                };
-                return t.update(topicRef, updates);
-              }
-            })
-            .then(() => {
-              let subtopicsRef = topicRef.collection('subtopics')
-              return t.set(subtopicsRef.doc(), {
-                name: result.name,
-                topicId: this.topicId,
-                subjectId: this.subjectId,
-                link: result.link,
-                notes: '',
-                confidence: 1,
-                streak: 0,
-                num_revisions: 0,
-                revision_deadline: new Date(0)
-              });
-            })
-            .then(() => {
-              this.snackBar.open(`Item Added`, 'Hide', {
-                duration: 2000
-              });
+          .collection('subtopics')
+          .add({
+            name: result.name,
+            topicId: this.topicId,
+            subjectId: this.subjectId,
+            link: result.link,
+            notes: '',
+            confidence: 1,
+            streak: 0,
+            num_revisions: 0,
+            revision_deadline: new Date(0)
+          })
+          .then(() => {
+            this.snackBar.open(`'${result}' Item Added`, 'Hide', {
+              duration: 2000
             });
-        });
+          });
+        
+        // let topicRef =  this.db
+        //   .collection('subjects')
+        //   .doc(this.subjectId)
+        //   .collection('topics')
+        //   .doc(this.topicId)
+
+        // this.db.runTransaction(t => {
+        //   return t
+        //     .get(topicRef)
+        //     .then(topic => {
+        //       if (!topic.exists) {
+        //         throw Error('Topic does not exist!');
+        //       } else {
+        //         const updates = {
+        //           count: (topic.data().count || 0) + 1
+        //         };
+        //         return t.update(topicRef, updates);
+        //       }
+        //     })
+        //     .then(() => {
+        //       let subtopicsRef = topicRef.collection('subtopics')
+        //       return t.set(subtopicsRef.doc(), {
+        //         name: result.name,
+        //         topicId: this.topicId,
+        //         subjectId: this.subjectId,
+        //         link: result.link,
+        //         notes: '',
+        //         confidence: 1,
+        //         streak: 0,
+        //         num_revisions: 0,
+        //         revision_deadline: new Date(0)
+        //       });
+        //     })
+        //     .then(() => {
+        //       this.snackBar.open(` Added`, 'Hide', {
+        //         duration: 2000
+        //       });
+        //     });
+        // });
+
+
+        
       }
     });
   }

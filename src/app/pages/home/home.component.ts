@@ -15,7 +15,42 @@ export class HomeComponent implements OnInit {
   @ViewChild('snav', {static: false}) sideNav: MatSidenav;
   constructor() {}
 
+  
+  
+
   ngOnInit() {
+
+    // START CALCULATE COUNTS FOR EACH TOPIC AND SUBJECT
+    // let counts_subject = {
+
+    // }
+    // let counts_topic = {
+
+    // }
+    // this.db.collectionGroup('subtopics').get().then((querySnapshot) => {
+    //   querySnapshot.forEach((doc) => {
+    //       // doc.data() is never undefined for query doc snapshots
+    //       let topic = doc.data().topicId;
+    //       let subject = doc.data().subjectId;
+    //       if(counts_subject[subject] == undefined){
+    //         counts_subject[subject] = 0
+    //       }
+    //       counts_subject[subject] += 1
+    //       if(counts_topic[subject+'__'+topic] == undefined){
+    //         counts_topic[subject+'__'+topic] = 0
+    //       }
+    //       counts_topic[subject+'__'+topic] += 1
+    //   });
+    //   console.log(counts_subject, counts_topic)
+    //   for (let subject in counts_subject){
+    //     this.db.collection('subjects').doc(subject).update({count : counts_subject[subject]})
+    //   }
+    //   for (let sub_top in counts_topic){
+    //     let parts = sub_top.split('__')
+    //     this.db.collection('subjects').doc(parts[0]).collection('topics').doc(parts[1]).update({count : counts_topic[sub_top]})
+    //   }
+    // })
+    // END CALCULATE COUNTS FOR EACH TOPIC AND SUBJECT
     
     // const probs = allQ.stat_status_pairs;
     // const probmap = {};

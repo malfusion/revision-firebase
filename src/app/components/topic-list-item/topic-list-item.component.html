@@ -2,7 +2,7 @@
   <div class="topic-line">
     <mat-icon class="centered-icon color-gray icon-small" mat-list-icon>format_list_bulleted</mat-icon>
     <span class="name-block" mat-line>
-      {{ topic.name }}
+      {{ topic.name }} ({{topic.count}})
     </span>
 
     <span class="filter-block">
@@ -96,7 +96,7 @@
   </div>
   <!-- <p class="path-text" mat-line>{{ topic.path }}</p> -->
 </mat-list-item>
-<div *ngIf="expanded[topic.id]">
+<div *ngIf="expanded">
   <app-subtopic-list
     [subjectId]="subjectId"
     [topicId]="topic.id"
