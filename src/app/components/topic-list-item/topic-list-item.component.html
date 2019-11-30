@@ -6,7 +6,7 @@
     </span>
 
     <span class="filter-block">
-      <span class="flex-row only-desktop">
+      <!-- <span class="flex-row only-desktop">
         <button
           class="confidence-filter-btn"
           mat-stroked-button
@@ -31,9 +31,10 @@
         >
           <div class="confidence-filter-btn-content confidence-3"></div>
         </button>
-      </span>
+      </span> -->
 
-      <span class="flex-row only-mobile">
+      <!-- <span class="flex-row only-mobile"> -->
+      <span class="flex-row">
         <span #confidenceTrigger="matMenuTrigger" [matMenuTriggerFor]="confidenceMenu"></span>
         <button class="confidence-filter-btn" mat-stroked-button (click)="openConfidenceFilterMenu($event)">
           <div
